@@ -1,0 +1,61 @@
+{
+  "name": "vsnet-runner",
+  "displayName": ".NET Runner",
+  "description": "Run and debug .NET Framework projects from VS Code via .netrunner config file",
+  "version": "1.0.0",
+  "publisher": "edelciomolina",
+  "icon": "icon.png",
+  "engines": { "vscode": "^1.74.0" },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onCommand:vsnetrunner.run",
+    "onCommand:vsnetrunner.runNoArgs",
+    "onCommand:vsnetrunner.debug"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "vsnetrunner.run",       "title": "Run .NET" },
+      { "command": "vsnetrunner.runNoArgs", "title": "Run .NET Without Args" },
+      { "command": "vsnetrunner.debug",     "title": "Run .NET With Debugger" }
+    ],
+    "menus": {
+      "explorer/context": [
+        { "when": "explorerResourceIsFolder", "command": "vsnetrunner.run",       "group": "navigation@1" },
+        { "when": "explorerResourceIsFolder", "command": "vsnetrunner.runNoArgs", "group": "navigation@2" },
+        { "when": "explorerResourceIsFolder", "command": "vsnetrunner.debug",     "group": "navigation@3" }
+      ]
+    },
+    "configuration": {
+      "title": ".NET Runner",
+      "properties": {
+        "vsnetrunner.msbuildPath": {
+          "type": "string",
+          "default": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+          "description": "Full path to MSBuild.exe"
+        },
+        "vsnetrunner.iisExpressPath": {
+          "type": "string",
+          "default": "C:\\Program Files\\IIS Express\\iisexpress.exe",
+          "description": "Full path to IIS Express executable"
+        },
+        "vsnetrunner.devenvPath": {
+          "type": "string",
+          "default": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe",
+          "description": "Full path to Visual Studio devenv.exe (usado para attach do debugger)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "^18.0.0",
+    "@vscode/vsce": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
