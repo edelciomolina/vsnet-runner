@@ -2,7 +2,7 @@
   "name": "vsnet-runner",
   "displayName": "DotNet Runner",
   "description": "Run and debug .NET Framework projects from VS Code via .netrunner config file",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "publisher": "edelciomolina",
   "author": {
     "name": "Edelcio Molina",
@@ -84,22 +84,22 @@
         {
           "when": "explorerResourceIsFolder",
           "command": "vsnetrunner.run",
-          "group": "navigation@1"
+          "group": "1_dotnetrunner@1"
         },
         {
           "when": "explorerResourceIsFolder",
           "command": "vsnetrunner.runNoArgs",
-          "group": "navigation@2"
+          "group": "1_dotnetrunner@2"
         },
         {
           "when": "explorerResourceIsFolder",
           "command": "vsnetrunner.debug",
-          "group": "navigation@3"
+          "group": "1_dotnetrunner@3"
         },
         {
           "when": "explorerResourceIsFolder",
           "command": "vsnetrunner.build",
-          "group": "navigation@4"
+          "group": "1_dotnetrunner@4"
         }
       ]
     },
