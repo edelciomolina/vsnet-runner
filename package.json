@@ -1,29 +1,106 @@
 {
   "name": "vsnet-runner",
-  "displayName": ".NET Runner",
+  "displayName": "DotNet Runner",
   "description": "Run and debug .NET Framework projects from VS Code via .netrunner config file",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "publisher": "edelciomolina",
+  "author": {
+    "name": "Edelcio Molina",
+    "url": "https://github.com/edelciomolina"
+  },
+  "license": "MIT",
+  "pricing": "Free",
   "icon": "icon.png",
-  "engines": { "vscode": "^1.74.0" },
-  "categories": ["Other"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edelciomolina/vsnet-runner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edelciomolina/vsnet-runner/issues"
+  },
+  "homepage": "https://github.com/edelciomolina/vsnet-runner#readme",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "dotnet",
+    ".net",
+    "msbuild",
+    "iis express",
+    "runner",
+    "debugger",
+    "visual studio",
+    "asp.net",
+    "web forms",
+    ".net framework"
+  ],
+  "galleryBanner": {
+    "color": "#111827",
+    "theme": "dark"
+  },
+  "extensionKind": [
+    "ui"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": ".NET Runner requires Windows, MSBuild and optionally IIS Express / Visual Studio 2022."
+    }
+  },
   "activationEvents": [
     "onCommand:vsnetrunner.run",
     "onCommand:vsnetrunner.runNoArgs",
-    "onCommand:vsnetrunner.debug"
+    "onCommand:vsnetrunner.debug",
+    "onCommand:vsnetrunner.build"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-      { "command": "vsnetrunner.run",       "title": "Run .NET" },
-      { "command": "vsnetrunner.runNoArgs", "title": "Run .NET Without Args" },
-      { "command": "vsnetrunner.debug",     "title": "Run .NET With Debugger" }
+      {
+        "command": "vsnetrunner.run",
+        "title": "Run .NET"
+      },
+      {
+        "command": "vsnetrunner.runNoArgs",
+        "title": "Run .NET Without Args"
+      },
+      {
+        "command": "vsnetrunner.debug",
+        "title": "Run .NET With Debugger"
+      },
+      {
+        "command": "vsnetrunner.build",
+        "title": "Build .NET"
+      }
     ],
     "menus": {
       "explorer/context": [
-        { "when": "explorerResourceIsFolder", "command": "vsnetrunner.run",       "group": "navigation@1" },
-        { "when": "explorerResourceIsFolder", "command": "vsnetrunner.runNoArgs", "group": "navigation@2" },
-        { "when": "explorerResourceIsFolder", "command": "vsnetrunner.debug",     "group": "navigation@3" }
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "vsnetrunner.run",
+          "group": "navigation@1"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "vsnetrunner.runNoArgs",
+          "group": "navigation@2"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "vsnetrunner.debug",
+          "group": "navigation@3"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "command": "vsnetrunner.build",
+          "group": "navigation@4"
+        }
       ]
     },
     "configuration": {
@@ -50,7 +127,10 @@
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package"
+    "check": "npm run compile && node scripts/validate.js",
+    "package": "npm run check && vsce package --out dist/",
+    "publish": "node scripts/deploy.js",
+    "vscode:prepublish": "npm run check"
   },
   "devDependencies": {
     "@types/vscode": "^1.74.0",

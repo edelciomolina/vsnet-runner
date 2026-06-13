@@ -1,11 +1,11 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
-import { runDotNet, runDotNetNoArgs, debugDotNet } from "./runner";
+import { runDotNet, runDotNetNoArgs, debugDotNet, buildDotNet } from "./runner";
 
 const CONFIG_FILE = ".netrunner";
 
-type RunMode = "run" | "run-no-args" | "debug";
+type RunMode = "run" | "run-no-args" | "debug" | "build";
 
 export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
@@ -18,6 +18,9 @@ export function activate(context: vscode.ExtensionContext): void {
     ),
     vscode.commands.registerCommand("vsnetrunner.debug", (uri: vscode.Uri) =>
       handle(uri, "debug")
+    ),
+    vscode.commands.registerCommand("vsnetrunner.build", (uri: vscode.Uri) =>
+      handle(uri, "build")
     )
   );
 }
@@ -77,6 +80,9 @@ function handle(uri: vscode.Uri, mode: RunMode): void {
       break;
     case "debug":
       debugDotNet(folderPath, configPath);
+      break;
+    case "build":
+      buildDotNet(folderPath, configPath);
       break;
   }
 }

@@ -1,5 +1,13 @@
-.vscode/**
+.github/**
+scripts/**
+coverage/**
+temp/**
 src/**
 tsconfig.json
+.gitignore
+package-lock.json
 node_modules/**
+dist/**
+*.log
 *.map
+icon.svg

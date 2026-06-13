@@ -32,7 +32,7 @@ function parseConfig(configPath: string): VsNetRunnerConfig {
   return JSON.parse(raw) as VsNetRunnerConfig;
 }
 
-type RunMode = "run" | "run-no-args" | "debug";
+type RunMode = "run" | "run-no-args" | "debug" | "build";
 
 function buildRunScript(
   folderPath: string,
@@ -69,7 +69,9 @@ function buildRunScript(
   lines.push(
     `if %ERRORLEVEL% neq 0 (echo [dotnet-runner] Erro: build falhou & exit /b 1)`
   );
-
+  if (mode === "build") {
+    return lines.join("\r\n");
+  }
   const run = config.run;
   if (!run || run.type === "none") {
     return lines.join("\r\n");
@@ -138,8 +140,14 @@ function execute(folderPath: string, configPath: string, mode: RunMode): void {
 
   const folderName = path.basename(folderPath);
   const suffix =
-    mode === "debug" ? " [Debug]" : mode === "run-no-args" ? " [No Args]" : "";
-  const terminalName = `Run .NET${suffix} — ${folderName}`;
+    mode === "debug"
+      ? " [Debug]"
+      : mode === "run-no-args"
+        ? " [No Args]"
+        : mode === "build"
+          ? " [Build]"
+          : "";
+  const terminalName = `${mode === "build" ? "Build .NET" : "Run .NET"}${suffix.replace(" [Build]", "")} — ${folderName}`;
 
   const terminal = getOrCreateTerminal(terminalName);
   terminal.show();
@@ -175,4 +183,8 @@ export function runDotNetNoArgs(folderPath: string, configPath: string): void {
 
 export function debugDotNet(folderPath: string, configPath: string): void {
   execute(folderPath, configPath, "debug");
+}
+
+export function buildDotNet(folderPath: string, configPath: string): void {
+  execute(folderPath, configPath, "build");
 }
