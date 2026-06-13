@@ -2,7 +2,7 @@
   "name": "vsnet-runner",
   "displayName": "DotNet Runner",
   "description": "Run and debug .NET Framework projects from VS Code via .netrunner config file",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "publisher": "edelciomolina",
   "author": {
     "name": "Edelcio Molina",
@@ -50,7 +50,7 @@
     },
     "virtualWorkspaces": {
       "supported": false,
-      "description": ".NET Runner requires Windows, MSBuild and optionally IIS Express / Visual Studio 2022."
+      "description": "DotNet Runner requires Windows, MSBuild and optionally IIS Express / Visual Studio 2022."
     }
   },
   "activationEvents": [
@@ -104,7 +104,7 @@
       ]
     },
     "configuration": {
-      "title": ".NET Runner",
+      "title": "DotNet Runner",
       "properties": {
         "vsnetrunner.msbuildPath": {
           "type": "string",

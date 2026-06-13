@@ -52,7 +52,7 @@ function findNearbyConfigs(folderPath: string): string[] {
 function handle(uri: vscode.Uri, mode: RunMode): void {
   if (!uri) {
     vscode.window.showErrorMessage(
-      ".NET Runner: clique com botão direito em uma pasta no Explorer."
+      "DotNet Runner: clique com botão direito em uma pasta no Explorer."
     );
     return;
   }
@@ -63,7 +63,7 @@ function handle(uri: vscode.Uri, mode: RunMode): void {
   if (!fs.existsSync(configPath)) {
     const nearby = findNearbyConfigs(folderPath);
     const folderName = path.basename(folderPath);
-    let msg = `.NET Runner: nenhum arquivo ${CONFIG_FILE} encontrado em "${folderName}".`;
+    let msg = `DotNet Runner: nenhum arquivo ${CONFIG_FILE} encontrado em "${folderName}".`;
     if (nearby.length > 0) {
       msg += ` Encontrado em: ${nearby.join(", ")}.`;
     }

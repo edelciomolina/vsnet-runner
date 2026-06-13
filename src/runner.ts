@@ -129,7 +129,7 @@ function execute(folderPath: string, configPath: string, mode: RunMode): void {
     config = parseConfig(configPath);
   } catch (e) {
     vscode.window.showErrorMessage(
-      `.NET Runner: erro ao ler .netrunner — ${e}`
+      `DotNet Runner: erro ao ler .netrunner — ${e}`
     );
     return;
   }

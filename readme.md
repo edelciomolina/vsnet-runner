@@ -1,8 +1,8 @@
-# .NET Runner
+# DotNet Runner
 
 🎯 Build, run and debug .NET Framework projects directly from VS Code's Explorer context menu.
 
-.NET Runner reads a `.netrunner` JSON file placed in a project folder and
+DotNet Runner reads a `.netrunner` JSON file placed in a project folder and
 generates the full build + run pipeline: compile dependencies, build the main
 project, set environment variables, launch IIS Express or an executable, and
 optionally attach the Visual Studio 2022 debugger — all from a single
