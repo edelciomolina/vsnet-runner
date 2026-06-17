@@ -2,7 +2,7 @@
   "name": "vsnet-runner",
   "displayName": "DotNet Runner",
   "description": "Run and debug .NET Framework projects from VS Code via .netrunner config file",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "publisher": "edelciomolina",
   "author": {
     "name": "Edelcio Molina",

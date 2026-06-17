@@ -1,4 +1,3 @@
-import * as cp from "child_process";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
@@ -107,13 +106,14 @@ export function spawnAttachVS2022(projectPath: string): void {
   const tmpScript = path.join(os.tmpdir(), `vsnet-attach-${Date.now()}.ps1`);
   fs.writeFileSync(tmpScript, psContent, "utf8");
 
-  cp.spawn("powershell", ["-ExecutionPolicy", "Bypass", "-File", tmpScript], {
-    detached: true,
-    stdio: "ignore",
-    windowsHide: false
-  }).unref();
+  const terminal = vscode.window.createTerminal({
+    name: "DotNet Debugger",
+    shellPath: "powershell.exe",
+    shellArgs: ["-ExecutionPolicy", "Bypass", "-File", tmpScript]
+  });
+  terminal.show(true); // preserveFocus = true (não tira foco do terminal principal)
 
-  // Clean up PS1 after 120s (enough for the attach sequence to complete)
+  // Clean up PS1 after 120s
   setTimeout(() => {
     try {
       fs.unlinkSync(tmpScript);
